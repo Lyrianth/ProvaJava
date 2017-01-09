@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.book-data .title {
+	width: 22em;
+	width: 40ch;
+}
+.book-data .isbn {
+    width: 9.5em;
+    width: 17ch;
+}
+.book-data .price {
+    width: 5.5em;
+    width: 10ch;
+}
+.book-data .date.ui-calendar>input {
+    width: 5.5em;
+    width: 10ch;
+}

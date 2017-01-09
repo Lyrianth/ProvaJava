@@ -1,0 +1,225 @@
+@CHARSET "UTF-8";
+
+/* HTML */
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* Top Menu */
+.header {
+	width: 100%;
+	height: 140px;
+}
+
+.top-menu {
+	width: 100%;
+}
+
+/* Content */
+
+.content {
+	height: calc(100% - 140px); /* 100% - header height*/
+	position: relative;
+}
+
+.datagrid.ui-panelgrid tr, .datagrid.ui-panelgrid td {
+	border: 0;
+	background: 0;
+}
+
+.fieldset-login {
+    width: 30em;
+    height: 8em;
+    
+    margin: auto;
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.form-login {
+	width: 100%;
+	height: 100%;
+	
+}
+
+.panel-background {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border: 0;
+}
+
+.panel-main {
+    -moz-border-radius: 6px 6px 0px 0px;
+    -webkit-border-radius: 6px 6px 0px 0px;
+    border-radius: 6px 6px 0px 0px;
+}
+.panel-main.ui-panel > .ui-panel-titlebar > .ui-panel-title {
+	font-size: 2em;
+	padding: .5em;
+}
+
+.required {
+	font-weight: bold;
+}
+
+.ui-autocomplete-items .ui-autocomplete-query {
+	font-weight: initial;
+}
+
+.ui-datatable.hide-column-header > .ui-datatable-tablewrapper > table > thead > tr {
+	display: none;
+}
+.ui-fieldset.custom-fieldset .ui-fieldset-legend {
+	background: none;
+	border: 0;
+	padding: .6em;
+	color: inherit;
+	font-weight: bold;
+}
+.ui-menu.ui-menubar .ui-menuitem {
+	padding-left: .5em;
+}
+
+.wrapper-button .ui-panelgrid {
+    width: 100%;
+}
+.wrapper-button .ui-panelgrid .ui-panelgrid-cell {
+    text-align: center;
+}
+
+/* Resizeable Screen */
+.auto-resizeable.ui-panel,
+.auto-resizeable.ui-panel > .ui-panel-titlebar,
+.auto-resizeable.ui-panel > .ui-panel-content,
+.auto-resizeable.ui-tabs, 
+.auto-resizeable.ui-tabs > .ui-tabs-panels,
+.auto-resizeable.ui-tabs > .ui-tabs-panels > .ui-tabs-panel,
+.auto-resizeable.ui-datatable-scrollable, 
+.auto-resizeable.ui-datatable-scrollable > .ui-datatable-header,
+.auto-resizeable.ui-datatable-scrollable > .ui-datatable-scrollable-header,
+.auto-resizeable.ui-datatable-scrollable > .ui-datatable-scrollable-body,
+.auto-resizeable.ui-datatable-scrollable > .ui-paginator-bottom, 
+.auto-resizeable.wrapper-data, 
+.auto-resizeable.wrapper-button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Margins and Padding should be done with top, bottom, left and right.*/
+    margin: 0;
+    padding: 0;
+}
+.auto-resizeable.panel-main > .ui-panel-titlebar {
+	bottom: initial;
+	height: 3em;
+}
+.auto-resizeable.panel-main > .ui-panel-content {
+	top: 3em;
+}
+
+.auto-resizeable.ui-tabs {
+    margin: 1em;
+}
+.auto-resizeable.ui-tabs > .ui-tabs-nav {
+    height: 2.6em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.auto-resizeable.ui-tabs > .ui-tabs-panels {
+    top: 2.6em;
+}
+
+.auto-resizeable.ui-tabs > .ui-tabs-panels > .ui-tabs-panel {
+    top: 1em;
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+    padding: 0;
+}
+
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-datatable-header {
+    bottom: initial;
+    height: 2em;
+    padding: .3em 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-datatable-scrollable-header {
+    top: 2em;
+    bottom: initial;
+}
+
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-datatable-scrollable-header,
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-datatable-scrollable-header > .ui-datatable-scrollable-header-box th {
+    height: 4.4em;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-datatable-scrollable-body {
+    top: 6.4em;
+    bottom: 2.4em;
+}
+
+.auto-resizeable.ui-datatable-scrollable.has-header > .ui-paginator-bottom {
+    top: initial;
+    height: 2.4em;
+    padding: .1em 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+} 
+
+.auto-resizeable.wrapper-data {
+    bottom: 4em;
+}
+.auto-resizeable.wrapper-data > .wrapper-data-overflow {
+    height: 100%;
+    overflow: auto;
+}
+.auto-resizeable.wrapper-button {
+    top: initial;
+}
+.auto-resizeable.wrapper-button,
+.auto-resizeable.wrapper-button > .ui-fieldset {
+    height: 4em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.auto-resizeable.wrapper-button > .ui-fieldset > .ui-fieldset-content,
+.auto-resizeable.wrapper-button > .ui-fieldset > .ui-fieldset-content > .ui-panelgrid  {
+    height: 100%;
+}
+
+/* Utilities */
+.center-content {
+    text-align: center;
+}
+.clean-panel-grid.ui-panelgrid > tbody > tr,
+.clean-panel-grid.ui-panelgrid > tbody > tr > td {
+    background: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+.noborder-panel-grid.ui-panelgrid > tbody > tr,
+.noborder-panel-grid.ui-panelgrid > tbody > tr > td {
+    border: 0;
+}
+.space {
+    height: 10px;
+    width: 100%;
+}
