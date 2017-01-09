@@ -37,12 +37,6 @@
 		<!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
 
 		<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.9.Final</version>
@@ -59,11 +53,11 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.0</version>
 		</dependency>
-		<!-- PrimeFaces -->
+		<!-- https://mvnrepository.com/artifact/org.primefaces.extensions/all-themes -->
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.8</version>
 		</dependency>
 
 		<!-- JSF 2 -->
@@ -79,17 +73,11 @@
 			<version>2.2.4</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.primefaces/primefaces -->
+		<!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>5.3</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-impl -->
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.14</version>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>2.5.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
@@ -116,6 +104,13 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.3.0.Final</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 
 

@@ -1,49 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<ui:composition template="_template.xhtml">
+<ui:composition template="_master_template.xhtml">
 
-	<ui:define name="titulo">
-		<p:outputPanel>Login</p:outputPanel>
-	</ui:define>
+    <ui:define name="template">
 
-	<ui:define name="conteudo">
+        <p:messages globalOnly="true" />
 
-		<p:messages globalOnly="true" />
+        <h:form id="login" styleClass="form-login">
+            <p:fieldset legend="Login" style="width: 400px" styleClass="fieldset-login custom-fieldset">
 
-		<h:form id="login">
-			<h:panelGrid columns="3">
-				<p:fieldset legend="Login" style="width: 400px">
+                <h:panelGrid columns="2">
 
-					<h:panelGrid columns="2">
+                    <p:outputLabel value="Email:" for="email" />
+                    <p:autoComplete id="email" value="#{loginBean.usuario.email}" completeMethod="#{loginBean.completeText}"
+                        autoHighlight="false" required="true" type="email" autocomplete="on">
+                    </p:autoComplete>
 
-						<p:outputLabel value="Email:" for="email" />
-						<p:inputText id="email" value="#{loginBean.usuario.email}"
-							required="true">
-							<f:passThroughAttribute name="type" value="email" />
-						</p:inputText>
+                    <p:outputLabel value="Senha:" for="senha" />
+                    <p:password id="senha" value="#{loginBean.usuario.senha}" feedback="false" required="true" />
 
-
-						<p:outputLabel value="Senha:" for="senha" />
-						<p:password id="senha" value="#{loginBean.usuario.senha}"
-							feedback="true" required="true" />
-
-						<p:commandButton value="Efetue Login"
-							action="#{loginBean.efetuaLogin}" update="@form" process="@form" />
-					</h:panelGrid>
-				</p:fieldset>
-				<h:panelGrid columns="1">
-					<p:message for="email" id="messageEmail" />
-					<p:message for="senha" id="messageSenha" />
-				</h:panelGrid>
-			</h:panelGrid>
-		</h:form>
-	</ui:define>
+                    <p:commandButton value="Efetue Login" action="#{loginBean.efetuaLogin}" update="@form" process="@form" />
+                </h:panelGrid>
+            </p:fieldset>
+            
+        </h:form>
+        
+    </ui:define>
 
 </ui:composition>
 

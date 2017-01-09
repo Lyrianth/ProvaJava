@@ -1,36 +1,33 @@
 package br.com.prova.livraria.modelo;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Integer id;
 	private String email;
 	private String senha;
-	
+	private boolean admin;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario createCopy() {
+		Usuario usuario = new Usuario();
+
+		usuario.id = this.id;
+		usuario.email = this.email;
+		usuario.senha = this.senha;
+		usuario.admin = this.admin;
+
+		return usuario;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-		public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getSenha() {
@@ -40,7 +37,13 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 }

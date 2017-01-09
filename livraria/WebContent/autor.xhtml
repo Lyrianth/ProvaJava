@@ -1,68 +1,97 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui" 
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<ui:composition template="_template.xhtml">
-	
-		<f:metadata>
-			<f:viewParam name="autorId" value="#{autorBean.autorId}" />
-			<f:viewAction action="#{autorBean.carregarAutorPelaId}" if="#{param.autorId != null}" />
-		</f:metadata>
+<ui:composition template="_template_tabview.xhtml">
 
-		<ui:define name="titulo">
-				<p:outputPanel>Novo Autor</p:outputPanel>
-		</ui:define>
+    <ui:param name="tabIndex" value="#{autorBean.tabIndex}" />
+    <ui:param name="pageTitle" value="Novo Autor" />
+    <ui:param name="tabFirstTitle" value="Consulta de Autores" />
+    <ui:param name="tabSecondTitle" value="Cadastro de Autores" />
 
-		<ui:define name="conteudo">
-			<h:form id="autor">
-				<p:fieldset legend="Dados do Autor">
-					<h:panelGrid columns="3">
+    <f:metadata>
+        <f:viewParam name="autorId" value="#{autorBean.autorId}" />
+        <f:viewAction action="#{autorBean.loadByID}" if="#{param.autorId != null}" />
+    </f:metadata>
 
-						<p:outputLabel value="Nome:" for="nome" />
-						<p:inputText id="nome" value="#{autorBean.autor.nome}"
-							required="true">
-							<f:validateLength minimum="5" />
-							<f:ajax event="blur" render="messageNome" />
-						</p:inputText>
-						<p:message for="nome" id="messageNome" />
-						
-						<p:outputLabel value="Email:" for="email" />
-						<p:inputText id="email" value="#{autorBean.autor.email}" required="true" validatorMessage="Email inválido">
-							<f:attribute name="type" value="email" />
-							<f:passThroughAttribute name="placeholder" value="Email do autor" />
-							<f:validateRegex pattern=".+@.+" />
-							<f:ajax event="blur" render="messageEmail" />
-						</p:inputText> 
+    <ui:define name="queryTable">
+        <h:form id="formQueryTable">
+            <p:dataTable styleClass="auto-resizeable has-header has-filter has-one-paginator" value="#{autorBean.lazyModel}" var="autor"
+                paginator="true" paginatorPosition="bottom" rows="10" lazy="true" scrollable="true" scrollHeight="auto">
+                <f:facet name="header">Autores</f:facet>
 
-						<p:message for="email" id="messageEmail" />
+                <p:column headerText="Nome" sortBy="#{autor.nome}">
+                    <h:outputText value="#{autor.nome}" />
+                </p:column>
 
-						<p:commandButton value="Gravar" action="#{autorBean.gravar}" process="@form" update="@form :formTabelaAutors" />
-					</h:panelGrid>
-				</p:fieldset>
-			</h:form>
-			
-			<h:form id="formTabelaAutors">
-				<p:dataList value="#{autorBean.autores}" var="autor" type="definition">
-					<f:facet name="header">
-						Autores
-					</f:facet>
-					
-					<p:commandButton icon="fa fa-fw fa-edit" update=":autor">
-						<f:setPropertyActionListener value="#{autor}" target="#{autorBean.autor}" />
-					</p:commandButton>
-					
-					<p:commandButton icon="fa fa-fw fa-remove" action="#{autorBean.remover(autor)}" 
-						update="@form" />
-						
-					#{autor.nome} - #{autor.email}
-				</p:dataList>
-			</h:form>		
-		</ui:define>
+                <p:column headerText="Email" sortBy="#{autor.email}">
+                    <h:outputText value="#{autor.email}" />
+                </p:column>
 
-	</ui:composition>
+                <p:column headerText="Qtd. Livro" styleClass="center-content">
+                    <h:outputText value="#{autorBean.getQntdLivros(autor)}" />
+                </p:column>
+
+                <p:column headerText="Alterar" styleClass="center-content">
+                    <p:commandButton icon="fa fa-fw fa-edit" update=":mainTab" actionListener="#{autorBean.update(autor)}">
+                        <p:confirm header="Alterar Autor" message="Gostaria de alterar o Autor?" icon="ui-icon-alert" />
+                    </p:commandButton>
+                </p:column>
+
+                <p:column headerText="Remover" styleClass="center-content">
+                    <p:commandButton icon="fa fa-fw fa-remove" action="#{autorBean.remover(autor)}" update="@form">
+                        <p:confirm header="Remover Autor" message='Tem certeza de que quer deletar o Autor "#{autor.nome}?"'
+                            icon="ui-icon-alert" />
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="dataManager">
+
+        <h:form id="autor">
+            <div class="wrapper-data auto-resizeable">
+                <div class="wrapper-data-overflow ui-datatable-scrollable-body">
+                    <!-- scrollable-body so we can use the theme's scroll -->
+
+                    <p:fieldset legend="Dados do Autor" styleClass="custom-fieldset">
+
+                        <p:panelGrid columns="3" styleClass="datagrid">
+                            <p:outputLabel value="Nome:" for="nome" />
+                            <p:inputText id="nome" value="#{autorBean.autor.nome}" required="true"
+                                validator="#{autorBean.checkAutorNameExists}">
+                                <f:validateLength minimum="5" />
+                                <f:ajax event="blur" render="messageNome" />
+                            </p:inputText>
+                            <p:message for="nome" id="messageNome" />
+
+                            <p:outputLabel value="Email:" for="email" />
+                            <p:inputText id="email" value="#{autorBean.autor.email}" required="true" validator="#{autorBean.checkEmail}">
+                                <f:attribute name="type" value="email" />
+                                <f:passThroughAttribute name="placeholder" value="Email do autor" />
+                                <f:ajax event="blur" render="messageEmail" />
+                            </p:inputText>
+                            <p:message for="email" id="messageEmail" />
+                        </p:panelGrid>
+
+                    </p:fieldset>
+                </div>
+            </div>
+
+            <div class="wrapper-button auto-resizeable">
+                <p:fieldset>
+                    <p:panelGrid columns="1" styleClass="clean-panel-grid">
+                        <p:commandButton value="Gravar" action="#{autorBean.gravar}" process="@form" update="@all" />
+                    </p:panelGrid>
+                </p:fieldset>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
 
 </html>

@@ -1,53 +1,44 @@
 package br.com.prova.livraria.modelo;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Livro implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue
-	private Integer id;
+public class Livro extends BaseEntity {
 
 	private String titulo;
 	private String isbn;
-	private double preco;
+	private BigDecimal preco;
 	@Temporal(TemporalType.DATE)
 	private Calendar dataLancamento = Calendar.getInstance();
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Autor> autores = new ArrayList<Autor>();
 
-	public List<Autor> getAutores() {
-		return autores;
-	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public Livro createCopy() {
+		Livro livro = new Livro();
 
-	public void adicionaAutor(Autor autor) {
-		this.autores.add(autor);
-	}
+		livro.id = this.id;
+		livro.titulo = this.titulo;
+		livro.isbn = this.isbn;
+		livro.preco = this.preco;
+		livro.dataLancamento = this.dataLancamento;
 
-	public Livro() {
-	}
+		livro.autores.clear();
+		for (Autor autor : this.autores)
+			livro.autores.add(autor.createCopy());
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		return livro;
 	}
 
 	public String getTitulo() {
@@ -66,11 +57,11 @@ public class Livro implements Serializable {
 		this.isbn = isbn;
 	}
 
-	public double getPreco() {
+	public BigDecimal getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
 	}
 
@@ -80,6 +71,14 @@ public class Livro implements Serializable {
 
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void addAutor(Autor autor) {
+		this.autores.add(autor);
 	}
 
 	public void removeAutor(Autor autor) {

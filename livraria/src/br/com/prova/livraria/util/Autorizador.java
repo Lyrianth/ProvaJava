@@ -6,7 +6,6 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import br.com.prova.livraria.dao.PopulaBanco;
 import br.com.prova.livraria.modelo.Usuario;
 
 public class Autorizador implements PhaseListener {
@@ -15,32 +14,30 @@ public class Autorizador implements PhaseListener {
 
 	@Override
 	public void afterPhase(PhaseEvent evento) {
+		System.out.println("afterPhase");
 
 		FacesContext context = evento.getFacesContext();
 		String nomePagina = context.getViewRoot().getViewId();
-	
 		System.out.println(nomePagina);
-		
-		if("/login.xhtml".equals(nomePagina)) {
-			return;
-		}
-		
+
 		Usuario usuarioLogado = (Usuario) context.getExternalContext().getSessionMap().get("usuarioLogado");
-		
-		if(usuarioLogado != null) {
+
+		if ("/login.xhtml".equals(nomePagina)) {
 			return;
 		}
 		
-		//redirecionamento para login.xhtml
-		
+		if (usuarioLogado != null)
+			return;
+
+		// redirecionamento para login.xhtml
 		NavigationHandler handler = context.getApplication().getNavigationHandler();
 		handler.handleNavigation(context, null, "/login?faces-redirect=true");
 		context.renderResponse();
-	} 
+	}
 
 	@Override
 	public void beforePhase(PhaseEvent event) {
-				
+
 	}
 
 	@Override
